@@ -5,9 +5,13 @@ SHELL = /bin/bash
 up: ## Start the docker containers
 	docker-compose up -d
 
-.PHONY: down
-down: ## Stop containers
+.PHONY: down stop
+down stop: ## Stop containers
 	docker-compose down
+
+.PHONY: clean reset
+clean reset: ## Remove containers and volumes
+	docker-compose down -v
 
 .PHONY: status
 status: ## Show status of containers

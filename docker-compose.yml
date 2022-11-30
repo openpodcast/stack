@@ -1,4 +1,12 @@
+version: "3.7"
 services:
+  api:
+    image: openpodcast/api:main
+    ports:
+      - "8080:8080"      
+    # Set env variables
+    environment:
+      - DB_CONNECTION_STRING=mysql://root:root@localhost:3306/openpodcast
   db:
     image: mysql:8.0
     # Can be removed as soon as ARM images for MySQL 8.0 are available
@@ -14,6 +22,7 @@ services:
       # So you don't have to use root, but you can if you like
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      MYSQL_INITDB_DATABASE: openpodcast
     ports:
       - "3306:3306"
     expose:
