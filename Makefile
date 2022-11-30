@@ -1,6 +1,10 @@
 # Use bash
 SHELL = /bin/bash
 
+.PHONY: help
+help: ## This help message
+	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
+
 .PHONY: up
 up: ## Start the docker containers
 	docker-compose up -d
@@ -26,7 +30,7 @@ build: ## Build the docker images
 logs: ## Show logs
 	docker-compose logs -f
 
-.PHONY: help
-help: ## This help message
-	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
+.PHONY: send-api-req-local
+send-api-req-local: ## Send a request to the local running server
+	curl -X POST http://localhost:8080/events -H 'Content-Type: application/json' -H 'Authorization: Bearer cn389ncoiwuencr' --data-binary "@./fixtures/forwarder.json" 
 
