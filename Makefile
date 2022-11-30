@@ -4,6 +4,7 @@ SHELL = /bin/bash
 .PHONY: up
 up: ## Start the docker containers
 	docker-compose up -d
+	docker-compose logs -f
 
 .PHONY: down stop
 down stop: ## Stop containers

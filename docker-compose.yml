@@ -4,8 +4,8 @@ services:
     image: openpodcast/api:main
     ports:
       - "8080:8080"      
-    # Set env variables
     environment:
+      # If you change this, you need to change it in the db service too
       - DB_CONNECTION_STRING=mysql://root:root@localhost:3306/openpodcast
   db:
     image: mysql:8.0
@@ -26,9 +26,9 @@ services:
     ports:
       - "3306:3306"
     expose:
-      # Opens port 3306 on the container
       - '3306'
     volumes:
+      - ./db_schema/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - db_data:/var/lib/mysql
     
 volumes:
