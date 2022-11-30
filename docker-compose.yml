@@ -6,7 +6,7 @@ services:
       - "8080:8080"      
     environment:
       # If you change this, you need to change it in the db service too
-      - DB_CONNECTION_STRING=mysql://root:root@localhost:3306/openpodcast
+      - DB_CONNECTION_STRING=mysql://root:root@db:3306/openpodcast
   db:
     image: mysql:8.0
     # Can be removed as soon as ARM images for MySQL 8.0 are available
