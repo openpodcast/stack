@@ -26,6 +26,10 @@ status: ## Show status of containers
 build: ## Build the docker images
 	docker-compose build
 
+.PHONY: restart reboot
+restart reboot: ## Restart the docker containers
+	docker-compose restart
+
 .PHONY: logs
 logs: ## Show logs
 	docker-compose logs -f
