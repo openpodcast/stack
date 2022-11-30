@@ -4,6 +4,8 @@ services:
     image: openpodcast/api:main
     ports:
       - "8080:8080"      
+    expose:
+      - "8080"
     environment:
       # If you change this, you need to change it in the db service too
       - DB_CONNECTION_STRING=mysql://root:root@db:3306/openpodcast
@@ -30,6 +32,17 @@ services:
     volumes:
       - ./db_schema/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - db_data:/var/lib/mysql
+  metabase:
+    image: metabase/metabase:v0.44.6
+    ports:
+      - "3000:3000"
+    expose:
+      - '3000'
+    volumes:
+      - metabase_data:/metabase-data
+    environment:
+      - MB_DB_CONNECTION_URI=jdbc:mysql://db:3306/openpodcast?user=root&password=root&allowPublicKeyRetrieval=true
     
 volumes:
   db_data:
+  metabase_data:
