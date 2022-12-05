@@ -9,6 +9,24 @@ services:
     environment:
       # If you change this, you need to change it in the db service too
       - DB_CONNECTION_STRING=mysql://root:root@db:3306/openpodcast
+    depends_on:
+      - db
+  spotify-connector:
+    image: openpodcast/spotify-connector:spotify-docker
+    env_file:
+      - .env.spotify
+    environment:
+      - CRON_SCHEDULE=0 10 * * *
+    depends_on:
+      - api
+  apple-connector:
+    image: openpodcast/apple-connector:apple-docker
+    env_file:
+      - .env.apple
+    environment:
+      - CRON_SCHEDULE=0 11 * * *
+    depends_on:
+      - api
   db:
     image: mysql:8.0
     # Can be removed as soon as ARM images for MySQL 8.0 are available
@@ -42,7 +60,8 @@ services:
       - metabase_data:/metabase-data
     environment:
       - MB_DB_CONNECTION_URI=jdbc:mysql://db:3306/openpodcast?user=root&password=root&allowPublicKeyRetrieval=true
-    
+    depends_on:
+      - db
 volumes:
   db_data:
   metabase_data:
