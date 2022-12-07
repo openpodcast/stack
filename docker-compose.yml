@@ -11,6 +11,19 @@ services:
       - DB_CONNECTION_STRING=mysql://root:root@db:3306/openpodcast
     depends_on:
       - db
+  forwarder:
+    image: openpodcast/forwarder:master
+    platform: linux/amd64
+    ports:
+      - "9000:9000"      
+    expose:
+      - "9000"
+    env_file:
+      - .env.forwarder
+    profiles:
+      - all
+    depends_on:
+      - api
   spotify-connector:
     image: openpodcast/spotify-connector:spotify-docker
     env_file:

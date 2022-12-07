@@ -10,6 +10,11 @@ up: ## Start the docker containers
 	docker-compose up -d
 	docker-compose logs -f
 
+.PHONY: up-all
+up-all: ## Start the docker containers (including forwarder)
+	docker-compose --profile all up
+	docker-compose logs -f
+
 .PHONY: down stop
 down stop: ## Stop containers
 	docker-compose down
