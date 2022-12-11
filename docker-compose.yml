@@ -25,7 +25,7 @@ services:
     depends_on:
       - api
   spotify-connector:
-    image: openpodcast/spotify-connector:spotify-docker
+    image: openpodcast/spotify-connector:main
     env_file:
       - .env.spotify
     environment:
@@ -33,7 +33,7 @@ services:
     depends_on:
       - api
   apple-connector:
-    image: openpodcast/apple-connector:apple-docker
+    image: openpodcast/apple-connector:main
     env_file:
       - .env.apple
     environment:
