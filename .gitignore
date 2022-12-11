@@ -1,3 +1,4 @@
 .env.spotify
 .env.apple
 .env.forwarder
+.env.apple-automation

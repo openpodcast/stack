@@ -40,6 +40,10 @@ services:
       - CRON_SCHEDULE=0 11 * * *
     depends_on:
       - api
+  apple-automation:
+    image: openpodcast/apple-automation:main
+    env_file:
+      - .env.apple-automation
   db:
     image: mysql:8.0
     # Can be removed as soon as ARM images for MySQL 8.0 are available
