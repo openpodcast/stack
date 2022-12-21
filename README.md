@@ -11,7 +11,8 @@ data about your podcast.
 The following services are included in this repository:
 
 - [API]: The API that is used to store the data in the database
-- [Forwarder]: A proxy in front of your podcast host which forwards realtime RSS request data to the API
+- [Forwarder]: A proxy in front of your podcast host which forwards realtime RSS
+  request data to the API
 - [Spotify-Connector]: The connector to fetch data from Spotify
 - [Apple-Connector]: The connector to fetch data from Apple
 - [Apple-Automation]: The automation to fetch a session cookie from Apple
@@ -38,8 +39,8 @@ graph LR
 Get started by using the [Docker Compose](https://docs.docker.com/compose/) file
 in this repository.
 
-First, you need to create a few `.env` files in the root of this repository. You can
-use the `*.env.sample` files as templates.
+First, you need to create a few `.env` files in the root of this repository. You
+can use the `*.env.sample` files as templates.
 
 Then, you can start the stack using
 
