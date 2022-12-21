@@ -3,6 +3,9 @@
 This is a collection of tools and services that can be used to create a
 standalone Open Podcast Analytics Stack.
 
+It allows you to jumpstart your own analytics stack and start collecting
+data about your podcast.
+
 ## Services
 
 The following services are included in this repository:
