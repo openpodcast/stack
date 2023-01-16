@@ -3,21 +3,17 @@ services:
   api:
     image: openpodcast/api:main
     ports:
-      - "8080:8080"      
-    expose:
-      - "8080"
+      - 8080:8080
     environment:
       # If you change this, you need to change it in the db service too
-      - DB_CONNECTION_STRING=mysql://root:root@db:3306/openpodcast
+      - DB_CONNECTION_STRING=mysql://openpodcast:password@db:3306/openpodcast
     depends_on:
       - db
   forwarder:
     image: openpodcast/forwarder:master
     platform: linux/amd64
     ports:
-      - "9000:9000"      
-    expose:
-      - "9000"
+      - 9000:9000
     env_file:
       - .env.forwarder
     profiles:
@@ -28,16 +24,12 @@ services:
     image: openpodcast/spotify-connector:main
     env_file:
       - .env.spotify
-    environment:
-      - CRON_SCHEDULE=0 10 * * *
     depends_on:
       - api
   apple-connector:
     image: openpodcast/apple-connector:main
     env_file:
       - .env.apple
-    environment:
-      - CRON_SCHEDULE=0 11 * * *
     depends_on:
       - api
   apple-automation:
@@ -50,35 +42,30 @@ services:
     platform: linux/amd64
     # Always restart the container if it stops. If it is manually stopped, it is
     # restarted only when Docker daemon restarts or the container itself is
-    # manually restarted. 
+    # manually restarted.
     restart: always
     environment:
-      MYSQL_DATABASE: mysql
+      MYSQL_DATABASE: openpodcast
       # Change this to a strong password for prod
       MYSQL_ROOT_PASSWORD: root
       # So you don't have to use root, but you can if you like
-      MYSQL_USER: user
+      MYSQL_USER: openpodcast
       MYSQL_PASSWORD: password
-      MYSQL_INITDB_DATABASE: openpodcast
-    ports:
-      - "3306:3306"
-    expose:
-      - '3306'
     volumes:
       - ./db_schema/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./db_schema/metabase.sql:/docker-entrypoint-initdb.d/metabase.sql
       - db_data:/var/lib/mysql
-  metabase:
+  analytics:
     image: metabase/metabase:v0.44.6
     ports:
-      - "3000:3000"
-    expose:
-      - '3000'
+      - 3000:3000
     volumes:
       - metabase_data:/metabase-data
     environment:
-      - MB_DB_CONNECTION_URI=jdbc:mysql://db:3306/openpodcast?user=root&password=root&allowPublicKeyRetrieval=true
+      - MB_DB_CONNECTION_URI=mysql://db:3306/metabase?user=metabase&password=metabaseSuperSecret&allowPublicKeyRetrieval=true
     depends_on:
       - db
+
 volumes:
   db_data:
   metabase_data:
