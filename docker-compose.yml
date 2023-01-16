@@ -54,6 +54,7 @@ services:
     volumes:
       - ./db_schema/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./db_schema/metabase.sql:/docker-entrypoint-initdb.d/metabase.sql
+      - ./db_schema/metabase_content.sql:/docker-entrypoint-initdb.d/metabase_content.sql
       - db_data:/var/lib/mysql
   analytics:
     image: metabase/metabase:v0.44.6

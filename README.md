@@ -40,7 +40,8 @@ Get started by using the [Docker Compose](https://docs.docker.com/compose/) file
 in this repository.
 
 First, you need to create a few `.env` files in the root of this repository. You
-can use the `*.env.sample` files as templates.
+can use the `*.env.sample` files as templates. Run `make env` to create the
+`.env` files automatically by copying the sample files.
 
 Then, you can start the stack using
 
@@ -76,3 +77,10 @@ make up-api
 [metabase]: https://github.com/metabase/metabase
 [mysql]: https://hub.docker.com/_/mysql
 [apple-automation]: https://github.com/openpodcast/apple-automation
+
+## Login and Testing
+
+If you haven't changed any passwords and just started the stack, you can login
+at `http://localhost:3000` with the following credentials:
+User-Email: noreply@test.example
+Password: OpenPodcastAdmin123 
