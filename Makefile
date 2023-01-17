@@ -16,7 +16,7 @@ up-all: ## Start the docker containers (including forwarder)
 	docker-compose logs -f
 
 .PHONY: env 
-env: ## Copy all env sample files to .env files
+env: ## Create required .env files from sample files
 	for file in $$(find . -name ".env.*.sample"); do cp $${file} $${file%.*}; done 
 
 .PHONY: up-%
