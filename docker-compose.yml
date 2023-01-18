@@ -52,7 +52,6 @@ services:
       MYSQL_USER: openpodcast
       MYSQL_PASSWORD: password
     volumes:
-      - ./db_schema/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./db_schema/metabase_user.sql:/docker-entrypoint-initdb.d/metabase_user.sql
       - ./db_schema/metabase_content.sql:/docker-entrypoint-initdb.d/x_metabase_content.sql
       - db_data:/var/lib/mysql
