@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   api:
-    image: openpodcast/api:docker-build-time
+    image: openpodcast/api:main
     ports:
       - 8080:8080
     environment:
