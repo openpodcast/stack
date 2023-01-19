@@ -52,6 +52,10 @@ shell-%: ## run shell for given container e.g. shell-db
 logs: ## Show logs
 	docker-compose logs -f
 
+.PHONY: logs-%
+logs-%: ## Show logs for a specific service
+	docker-compose logs $* -f
+
 .PHONY: send-api-req-local
 send-api-req-local: ## Send a request to the local running server
 	curl -X POST http://localhost:8080/events -H 'Content-Type: application/json' -H 'Authorization: Bearer cn389ncoiwuencr' --data-binary "@./fixtures/forwarder.json" 
