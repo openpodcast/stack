@@ -1,12 +1,13 @@
 version: "3.7"
 services:
   api:
-    image: openpodcast/api:main
+    image: openpodcast/api:docker-build-time
     ports:
       - 8080:8080
     environment:
       # If you change this, you need to change it in the db service too
       - DB_CONNECTION_STRING=mysql://openpodcast:password@db:3306/openpodcast
+      - ACCOUNTS={"dummy-cn389ncoiwuencr":0}
     depends_on:
       - db
   forwarder:
